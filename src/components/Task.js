@@ -42,23 +42,24 @@ function Task({
         <div
             style={{
                 width: "80vw",
-                height: "70vh",
-                backgroundColor: completed ? "#8ed9af" : "#26f080",
-                borderRadius: "5vw",
+                padding: "20px",
+                backgroundColor: "#b08fff",
+                opacity: completed ? "80%" : "100%",
+                borderRadius: "30px",
                 userSelect: "none",
-                top: "15vh",
+                top: "10vh",
                 position: "fixed",
-                margin: "0px",
-                boxShadow: "0px 0px 15px",
+                boxShadow: "0px 0px 15px white",
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
+                fontSize: "1.5em",
             }}
         >
-            <h1 style={{ marginBottom: "0px" }}>{name}</h1>
+            <h1 style={{ marginBottom: "0px", marginTop: "0" }}>{name}</h1>
             <p style={{ margin: "0px" }}>{description}</p>
             <input
-                style={{ fontSize: "2vh", marginLeft: "20vw" }}
+                style={{ fontSize: "2vh", marginLeft: "auto", marginRight: "auto", marginTop: "10px", marginBottom: "10px", }}
                 type="file"
                 title="Upload Image"
                 accept="image/*"
@@ -111,7 +112,7 @@ function Task({
             {completed ? null : (
                 <div style={{ display: "flex", flexDirection: "row" }}>
                     <button
-                        style={{ fontSize: "10vh", borderRadius: "1vw" }}
+                        style={{ margin: "20px", fontSize: "1em", borderRadius: "10vw", backgroundColor: "#003487", color: "white", fontFamily: "MuseoModerno" }}
                         type="submit"
                         onClick={() => {
                             uploadFile(image, gameID, id, username);
@@ -123,9 +124,13 @@ function Task({
                     </button>
                     <p
                         style={{
-                            fontSize: "10vh",
+                            fontSize: "7vh",
+                            fontFamily: "sans-serif",
                             color: "red",
                             margin: "0px",
+                            position: "absolute",
+                            top: "3%",
+                            left: "3%",
                         }}
                         onClick={onExit}
                     >
