@@ -87,6 +87,9 @@ function Login({ onSubmit, defaultGameID }) {
                         justifyContent: "center",
                         textAlign: "center",
                         fontSize: "10vw",
+                        fontFamily: "'MuseoModerno', sans-serif",
+                        fontWeight: "500",
+                        outline: "none",
                     }}
                     placeholder="Game ID"
                     type="text"
