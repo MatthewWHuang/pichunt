@@ -1,7 +1,14 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getStorage, ref, uploadBytes } from "firebase/storage";
+import {
+    getStorage,
+    ref,
+    uploadBytes,
+    getDownloadURL,
+    listAll,
+} from "firebase/storage";
+import { getDatabase, ref as databaseRef, set } from "firebase/database";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -16,20 +23,36 @@ const firebaseConfig = {
     messagingSenderId: "998626021513",
     appId: "1:998626021513:web:7362387e68dd4303a3b658",
     measurementId: "G-0K7QB2X46S",
+    databaseURL: "https://pichunt-fa4db-default-rtdb.firebaseio.com",
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const storage = getStorage(app);
+const database = getDatabase(app);
 
 function uploadFile(file, gameID, task, user) {
     const storageRef = ref(storage, `/${gameID}/${task}/${user}`);
 
     // 'file' comes from the Blob or File API
     uploadBytes(storageRef, file).then((snapshot) => {
-        console.log("Uploaded image!");
+        console.log(`Uploaded image to` + `/${gameID}/${task}/${user}!`);
     });
 }
 
-export { uploadFile };
+function downloadFile(ref) {
+    return getDownloadURL(ref);
+}
+
+async function getUsersForTask(gameID, task) {
+    const storageRef = ref(storage, `/${gameID}/${task}`);
+    return await listAll(storageRef);
+}
+
+function setWinner(gameID, task, winner) {
+    const ref = databaseRef(database, `/${gameID}/${task}`);
+    set(ref, winner);
+}
+
+export { uploadFile, downloadFile, getUsersForTask, setWinner };
