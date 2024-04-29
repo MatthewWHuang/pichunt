@@ -3,10 +3,12 @@ function TaskItem({ name, description, completed, onClick }) {
         <div
             style={{
                 width: "80vw",
-                backgroundColor: completed ? "#8ed9af" : "#26f080",
-                borderRadius: "5vw",
+                backgroundColor: "#b08fff",
+                opacity: completed ? "80%" : "100%",
+                borderRadius: "30px",
                 margin: "0px",
                 marginTop: "2vh",
+                padding: "10px",
                 userSelect: "none",
                 color: completed ? "#444444" : "#000000",
             }}

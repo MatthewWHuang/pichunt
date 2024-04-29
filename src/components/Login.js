@@ -11,7 +11,7 @@ function Login({ onSubmit }) {
             style={{
                 width: "80vw",
                 height: "70vh",
-                backgroundColor: "#26f080",
+                backgroundColor: "#0fc8c0",
                 borderRadius: "5vw",
                 userSelect: "none",
                 top: "15vh",
@@ -45,15 +45,25 @@ function Login({ onSubmit }) {
                         justifyContent: "center",
                         textAlign: "center",
                         fontSize: "10vw",
+                        fontFamily: "'MuseoModerno', sans-serif",
+                        fontWeight: "500",
+                        outline: "none",
                     }}
                     placeholder="Username"
                     type="text"
                     id="username"
+                    autoComplete="off"
                     onChange={onUsernameChanged}
                 />
             </div>
             <button
-                style={{ fontSize: "10vh", borderRadius: "1vw" }}
+                style={{
+                    fontSize: "10vh",
+                    borderRadius: "1vw",
+                    fontFamily: "'MuseoModerno', sans-serif",
+                    fontWeight: "500",
+                    borderColor: "transparent"
+                }}
                 onClick={(e) => {
                     onSubmit(username);
                 }}
