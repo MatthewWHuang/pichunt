@@ -48,8 +48,7 @@ function Task({
                 userSelect: "none",
                 top: "10vh",
                 position: "fixed",
-                margin: "0px",
-                boxShadow: "0px 0px 15px",
+                boxShadow: "0px 0px 15px white",
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
@@ -59,7 +58,7 @@ function Task({
             <h1 style={{ marginBottom: "0px", marginTop: "0" }}>{name}</h1>
             <p style={{ margin: "0px" }}>{description}</p>
             <input
-                style={{ fontSize: "2vh", marginLeft: "auto", marginRight: "auto" }}
+                style={{ fontSize: "2vh", marginLeft: "auto", marginRight: "auto", marginTop: "10px", marginBottom: "10px", }}
                 type="file"
                 title="Upload Image"
                 accept="image/*"

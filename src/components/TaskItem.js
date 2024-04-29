@@ -16,6 +16,11 @@ function TaskItem({ name, description, completed, onClick }) {
         >
             <h1 style={{ marginTop: "0px" }}>{name}</h1>
             <p>{description}</p>
+            <p style={{
+                visibility: completed ? "visible" : "hidden",
+                fontSize: "2em",
+                margin: "10px",
+            }}>✔️</p>
         </div>
     );
 }
