@@ -1,65 +1,19 @@
 import "./App.css";
 import TaskList from "./components/TaskList";
-import React, { useState } from "react";
-
+import React, { useState, useEffect } from "react";
+import Login from "./components/Login";
 function App() {
-    const [tasks, setTasks] = useState([
-        {
-            name: "Fresh Fruit",
-            description: "Take a picture of fresh fruit.",
-            completed: true,
-        },
-        {
-            name: "Fresh Fruit",
-            description: "Take a picture of fresh fruit.",
-            completed: false,
-        },
-        {
-            name: "Fresh Fruit",
-            description: "Take a picture of fresh fruit.",
-            completed: false,
-        },
-        {
-            name: "Fresh Fruit",
-            description: "Take a picture of fresh fruit.",
-            completed: false,
-        },
-        {
-            name: "Fresh Fruit",
-            description: "Take a picture of fresh fruit.",
-            completed: false,
-        },
-        {
-            name: "Fresh Fruit",
-            description: "Take a picture of fresh fruit.",
-            completed: false,
-        },
-        {
-            name: "Fresh Fruit",
-            description: "Take a picture of fresh fruit.",
-            completed: false,
-        },
-        {
-            name: "Fresh Fruit",
-            description: "Take a picture of fresh fruit.",
-            completed: false,
-        },
-        {
-            name: "Fresh Fruit",
-            description: "Take a picture of fresh fruit.",
-            completed: false,
-        },
-        {
-            name: "Fresh Fruit",
-            description: "Take a picture of fresh fruit.",
-            completed: false,
-        },
-    ]);
-    const changeTask = (index, newTask) => {
-        const newTasks = [...tasks];
-        newTasks[index] = newTask;
-        setTasks(newTasks);
-    };
+    const [username, setUsername] = useState("");
+    useEffect(() => {
+        if (!username) {
+            var oldUsername = localStorage.getItem("PicHuntUsername");
+            if (oldUsername) {
+                setUsername(oldUsername);
+            }
+        } else {
+            localStorage.setItem("PicHuntUsername", username);
+        }
+    }, [username]);
     return (
         <div
             className="App"
@@ -70,7 +24,11 @@ function App() {
                 margin: "0px",
             }}
         >
-            <TaskList tasks={tasks} changeTask={changeTask} />
+            {username ? (
+                <TaskList username={username} />
+            ) : (
+                <Login onSubmit={setUsername} />
+            )}
         </div>
     );
 }

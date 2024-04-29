@@ -1,13 +1,38 @@
 import TaskItem from "./TaskItem";
 import Task from "./Task";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-function TaskList({ tasks, changeTask }) {
+function TaskList({ username }) {
+    const [tasks, setTasks] = useState([
+        {
+            name: "Fresh Fruit",
+            description: "Take a picture of fresh fruit.",
+            completed: false,
+            id: "freshfruit",
+        },
+    ]);
+    const [tasksLoaded, setTasksLoaded] = useState(false);
+    const changeTask = (index, newTask) => {
+        const newTasks = [...tasks];
+        newTasks[index] = newTask;
+        setTasks(newTasks);
+    };
     const [activeTask, setActiveTask] = useState(null);
     const [activeTaskIndex, setActiveTaskIndex] = useState(null);
     const setCompleted = (index, newCompleted) => {
         changeTask(index, { ...tasks[index], completed: newCompleted });
     };
+    useEffect(() => {
+        if (!tasksLoaded) {
+            var loadedTasks = localStorage.getItem("PicHuntTasks");
+            if (loadedTasks) {
+                setTasks(JSON.parse(loadedTasks));
+            }
+            setTasksLoaded(true);
+        } else {
+            localStorage.setItem("PicHuntTasks", JSON.stringify(tasks));
+        }
+    }, [tasks]);
     return (
         <div
             style={{
@@ -16,6 +41,9 @@ function TaskList({ tasks, changeTask }) {
                 flexDirection: "column",
             }}
         >
+            <h1>
+                Logged in as <b>{username}</b>.
+            </h1>
             {tasks.map((task, i) => (
                 <TaskItem
                     name={task.name}
@@ -25,7 +53,7 @@ function TaskList({ tasks, changeTask }) {
                         setActiveTask(task);
                         setActiveTaskIndex(i);
                     }}
-                    key={i}
+                    key={task.id}
                 />
             ))}
             {activeTask ? (
@@ -40,6 +68,7 @@ function TaskList({ tasks, changeTask }) {
                         setActiveTask(null);
                     }}
                     onExit={() => setActiveTask(null)}
+                    id={activeTask.id}
                 />
             ) : null}
         </div>

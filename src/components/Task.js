@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { uploadFile } from "../cloud/upload";
 
 function Task({
     name,
@@ -7,10 +8,10 @@ function Task({
     setCompleted,
     onSubmit,
     onExit,
+    id,
 }) {
     const [image, setImage] = useState(null);
     const onImageChanged = (e) => {
-        console.log(e.target.files[0]);
         setImage(e.target.files[0]);
     };
     return (
@@ -45,25 +46,32 @@ function Task({
                     src={URL.createObjectURL(image)}
                 />
             ) : null}
-            <div style={{ display: "flex", flexDirection: "row" }}>
-                <button
-                    style={{ fontSize: "10vh", borderRadius: "1vw" }}
-                    type="submit"
-                    onClick={() => {
-                        setCompleted(true);
-                        onSubmit(image);
-                    }}
-                    disabled={image == null}
-                >
-                    Submit
-                </button>
-                <p
-                    style={{ fontSize: "10vh", color: "red", margin: "0px" }}
-                    onClick={onExit}
-                >
-                    <b>X</b>
-                </p>
-            </div>
+            {completed ? null : (
+                <div style={{ display: "flex", flexDirection: "row" }}>
+                    <button
+                        style={{ fontSize: "10vh", borderRadius: "1vw" }}
+                        type="submit"
+                        onClick={() => {
+                            setCompleted(true);
+                            uploadFile(image, "0", id, "admin");
+                            onSubmit(image);
+                        }}
+                        disabled={image == null}
+                    >
+                        Submit
+                    </button>
+                    <p
+                        style={{
+                            fontSize: "10vh",
+                            color: "red",
+                            margin: "0px",
+                        }}
+                        onClick={onExit}
+                    >
+                        <b>X</b>
+                    </p>
+                </div>
+            )}
         </div>
     );
 }
