@@ -37,6 +37,7 @@ function TaskList({ username, defaultTasks, gameID }) {
                 display: "flex",
                 alignItems: "center",
                 flexDirection: "column",
+                color: "white",
             }}
         >
             <h1>
@@ -59,18 +60,20 @@ function TaskList({ username, defaultTasks, gameID }) {
                     username={username}
                     gameID={gameID}
                 />
-            ) : tasks.map((task, i) => (
-                <TaskItem
-                    name={task.name}
-                    description={task.description}
-                    completed={task.completed}
-                    onClick={() => {
-                        setActiveTask(task);
-                        setActiveTaskIndex(i);
-                    }}
-                    key={task.id}
-                />
-            ))}
+            ) : (
+                tasks.map((task, i) => (
+                    <TaskItem
+                        name={task.name}
+                        description={task.description}
+                        completed={task.completed}
+                        onClick={() => {
+                            setActiveTask(task);
+                            setActiveTaskIndex(i);
+                        }}
+                        key={task.id}
+                    />
+                ))
+            )}
         </div>
     );
 }

@@ -1,5 +1,5 @@
-import React, { useState, useRef } from "react";
-import { uploadFile } from "../cloud/cloud";
+import React, { useState, useRef, useEffect } from "react";
+import { uploadFile, downloadFile, getFileRef } from "../cloud/cloud";
 
 function Task({
     name,
@@ -11,11 +11,13 @@ function Task({
     username,
     gameID,
 }) {
-    const [image, setImage] = useState(null);
+    const [image, setImage] = useState(getFileRef(gameID, id, username));
+    const [imageURL, setImageURL] = useState(null);
     const [takingPicture, setTakingPicture] = useState(false);
     const videoRef = useRef(null);
     const onImageChanged = (e) => {
         setImage(e.target.files[0]);
+        setImageURL(URL.createObjectURL(e.target.files[0]));
     };
     const takePicture = () => {
         const video = videoRef.current;
@@ -30,18 +32,18 @@ function Task({
         // Convert the canvas image to a Blob
         canvas.toBlob((blob) => {
             setImage(blob);
+            setImageURL(URL.createObjectURL(blob));
             setTakingPicture(false);
-            // // Create a download link for the user
-            // const downloadLink = document.createElement("a");
-            // downloadLink.download = "captured_image.png";
-            // downloadLink.href = URL.createObjectURL(blob);
-            // downloadLink.click();
         }, "image/png");
     };
+    useEffect(() => {
+        downloadFile(image).then((url) => setImageURL(url));
+    }, []);
     return (
         <div
             style={{
                 width: "80vw",
+                maxHeight: "80vh",
                 padding: "20px",
                 backgroundColor: "#b08fff",
                 opacity: completed ? "80%" : "100%",
@@ -54,12 +56,19 @@ function Task({
                 flexDirection: "column",
                 alignItems: "center",
                 fontSize: "1.5em",
+                overflow: "scroll",
             }}
         >
             <h1 style={{ marginBottom: "0px", marginTop: "0" }}>{name}</h1>
             <p style={{ margin: "0px" }}>{description}</p>
             <input
-                style={{ fontSize: "2vh", marginLeft: "auto", marginRight: "auto", marginTop: "10px", marginBottom: "10px", }}
+                style={{
+                    fontSize: "2vh",
+                    marginLeft: "auto",
+                    marginRight: "auto",
+                    marginTop: "10px",
+                    marginBottom: "10px",
+                }}
                 type="file"
                 title="Upload Image"
                 accept="image/*"
@@ -106,38 +115,44 @@ function Task({
             {image ? (
                 <img
                     style={{ maxWidth: "70vw", height: "30vh" }}
-                    src={URL.createObjectURL(image)}
+                    src={imageURL}
                 />
             ) : null}
-            {completed ? null : (
-                <div style={{ display: "flex", flexDirection: "row" }}>
-                    <button
-                        style={{ margin: "20px", fontSize: "1em", borderRadius: "10vw", backgroundColor: "#003487", color: "white", fontFamily: "MuseoModerno" }}
-                        type="submit"
-                        onClick={() => {
-                            uploadFile(image, gameID, id, username);
-                            onSubmit(image);
-                        }}
-                        disabled={image == null}
-                    >
-                        Submit
-                    </button>
-                    <p
-                        style={{
-                            fontSize: "7vh",
-                            fontFamily: "sans-serif",
-                            color: "red",
-                            margin: "0px",
-                            position: "absolute",
-                            top: "3%",
-                            left: "3%",
-                        }}
-                        onClick={onExit}
-                    >
-                        <b>X</b>
-                    </p>
-                </div>
-            )}
+
+            <div style={{ display: "flex", flexDirection: "row" }}>
+                <button
+                    style={{
+                        margin: "20px",
+                        fontSize: "1em",
+                        borderRadius: "10vw",
+                        backgroundColor: "#003487",
+                        color: "white",
+                        fontFamily: "MuseoModerno",
+                    }}
+                    type="submit"
+                    onClick={() => {
+                        uploadFile(image, gameID, id, username);
+                        onSubmit(image);
+                    }}
+                    disabled={image == null}
+                >
+                    {completed ? "Update" : "Submit"}
+                </button>
+                <p
+                    style={{
+                        fontSize: "7vh",
+                        fontFamily: "sans-serif",
+                        color: "red",
+                        margin: "0px",
+                        position: "absolute",
+                        top: "3%",
+                        left: "3%",
+                    }}
+                    onClick={onExit}
+                >
+                    <b>X</b>
+                </p>
+            </div>
         </div>
     );
 }

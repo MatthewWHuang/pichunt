@@ -39,6 +39,10 @@ function uploadFile(file, gameID, task, user) {
     uploadBytes(storageRef, file);
 }
 
+function getFileRef(gameID, task, user) {
+    return ref(storage, `/${gameID}/${task}/${user}`);
+}
+
 function downloadFile(ref) {
     return getDownloadURL(ref);
 }
@@ -72,4 +76,5 @@ export {
     setWinner,
     loadGame,
     gameExists,
+    getFileRef,
 };
