@@ -104,12 +104,13 @@ function Login({ onSubmit, defaultGameID }) {
             </div>
             <button
                 style={{
-                    fontSize: "10vh",
+                    fontSize: "10vw",
                     borderRadius: "1vw",
                     fontFamily: "'MuseoModerno', sans-serif",
                     fontWeight: "500",
                     borderColor: "transparent",
                     backgroundColor: "white",
+                    padding: "0px",
                 }}
                 onClick={(e) => {
                     onSubmit(username, gameID);
