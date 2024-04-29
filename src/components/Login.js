@@ -25,6 +25,7 @@ function Login({ onSubmit, defaultGameID }) {
                 width: "80vw",
                 height: "100%",
                 backgroundImage: `url(${purpleSpace})`,
+                backgroundSize: "cover",
                 borderRadius: "5vw",
                 userSelect: "none",
                 left: "10vw",
@@ -45,7 +46,7 @@ function Login({ onSubmit, defaultGameID }) {
             >
                 <label
                     htmlFor="username"
-                    style={{ margin: "1vh", fontSize: "5vw", color: "white", }}
+                    style={{ margin: "1vh", fontSize: "5vw", color: "white" }}
                 >
                     Enter Username:{" "}
                 </label>
@@ -77,7 +78,7 @@ function Login({ onSubmit, defaultGameID }) {
             >
                 <label
                     htmlFor="game"
-                    style={{ margin: "1vh", fontSize: "5vw", color: "white", }}
+                    style={{ margin: "1vh", fontSize: "5vw", color: "white" }}
                 >
                     Enter Game ID:{" "}
                 </label>
@@ -113,7 +114,7 @@ function Login({ onSubmit, defaultGameID }) {
                 onClick={(e) => {
                     onSubmit(username, gameID);
                 }}
-                disabled={username == "" || !gameExists}
+                disabled={username == "" || gameID == "" || !gameExists}
             >
                 Submit
             </button>

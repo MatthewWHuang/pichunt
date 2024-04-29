@@ -1,11 +1,13 @@
 import { setWinner } from "../cloud/cloud";
 import JudgeTask from "./JudgeTask";
+import Present from "./Present";
 import TaskItem from "./TaskItem";
 import React, { useState, useEffect } from "react";
 
 function Judge({ defaultTasks, gameID }) {
     const [tasks, setTasks] = useState(defaultTasks);
     const [tasksLoaded, setTasksLoaded] = useState(false);
+    const [presenting, setPresenting] = useState(false);
     const [activeTask, setActiveTask] = useState(null);
     const [activeTaskIndex, setActiveTaskIndex] = useState(null);
     const changeTask = (index, newTask) => {
@@ -33,15 +35,18 @@ function Judge({ defaultTasks, gameID }) {
             localStorage.setItem("PicHuntTasks", JSON.stringify(defaultTasks));
         }
     }, [defaultTasks]);
+    if (presenting) {
+        return <Present gameID={gameID} />;
+    }
     return (
         <div
             style={{
                 display: "flex",
                 alignItems: "center",
                 flexDirection: "column",
+                paddingBottom: "10vh",
             }}
         >
-            <h1 style={{ color: "white" }}>Judge</h1>
             {activeTask ? (
                 <JudgeTask
                     name={activeTask.name}
@@ -70,6 +75,51 @@ function Judge({ defaultTasks, gameID }) {
                     />
                 ))
             )}
+            <div
+                style={{
+                    position: "fixed",
+                    bottom: "0px",
+                    boxShadow: "0px 0px 5px 5px white",
+                    padding: "5px",
+                    backgroundColor: "black",
+                    paddingBottom: "0px",
+                    width: "100%",
+                    zIndex: "1",
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
+                    justifyContent: "center",
+                }}
+            >
+                <h1
+                    style={{ color: "white", margin: "0px", cursor: "default" }}
+                >
+                    Judge
+                </h1>
+                {true || tasks.filter((task) => !task.completed).length == 0 ? (
+                    <div
+                        style={{
+                            color: "white",
+                            cornerRadius: "10px",
+                            backgroundColor: "gray",
+                            width: "max-content",
+                            cursor: "pointer",
+                            borderRadius: "5px",
+                            marginLeft: "5px",
+                            paddingLeft: "10px",
+                            paddingRight: "10px",
+                            fontSize: "2em",
+                        }}
+                    >
+                        <p
+                            style={{ margin: "0px" }}
+                            onClick={() => setPresenting(true)}
+                        >
+                            Present Winners
+                        </p>
+                    </div>
+                ) : null}
+            </div>
         </div>
     );
 }

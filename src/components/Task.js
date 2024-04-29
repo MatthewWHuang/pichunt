@@ -53,6 +53,7 @@ function Task({
                 maxHeight: "80vh",
                 padding: "20px",
                 backgroundImage: `url(${darkSwirls})`,
+                backgroundSize: "cover",
                 borderRadius: "30px",
                 userSelect: "none",
                 top: "2vh",
@@ -71,11 +72,12 @@ function Task({
                     marginBottom: "0px",
                     marginTop: "0",
                     maxWidth: "75vw",
+                    color: "white",
                 }}
             >
                 {name}
             </h1>
-            <p style={{ margin: "0px" }}>{description}</p>
+            <p style={{ margin: "0px", color: "white" }}>{description}</p>
             <div
                 style={{
                     fontSize: "2vh",

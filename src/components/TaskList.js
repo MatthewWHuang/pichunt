@@ -38,6 +38,7 @@ function TaskList({ username, defaultTasks, gameID }) {
                 alignItems: "center",
                 flexDirection: "column",
                 color: "white",
+                paddingBottom: "10vh",
             }}
         >
             {activeTask ? (
@@ -76,7 +77,7 @@ function TaskList({ username, defaultTasks, gameID }) {
                 style={{
                     position: "fixed",
                     bottom: "0px",
-                    boxShadow: "0px 0px 5px 5px",
+                    boxShadow: "0px 0px 5px 5px white",
                     padding: "5px",
                     backgroundColor: "black",
                     paddingBottom: "0px",

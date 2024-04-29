@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { downloadFile, getUsersForTask } from "../cloud/cloud";
 
+import darkSwirls from "../dark-swirls.jpg";
+
 function JudgeTask({
     name,
     description,
@@ -30,11 +32,12 @@ function JudgeTask({
             style={{
                 width: "80vw",
                 height: "70vh",
-                backgroundColor: "#b08fff",
+                backgroundImage: `url(${darkSwirls})`,
+                backgroundSize: "cover",
                 opacity: completed ? "80%" : "100%",
                 borderRadius: "5vw",
                 userSelect: "none",
-                top: "15vh",
+                top: "2vh",
                 position: "fixed",
                 margin: "0px",
                 boxShadow: "0px 0px 15px",
@@ -43,8 +46,19 @@ function JudgeTask({
                 alignItems: "center",
             }}
         >
-            <h1>{name}</h1>
-            <p>{description}</p>
+            <h1
+                style={{
+                    marginBottom: "0px",
+                    marginTop: "0",
+                    maxWidth: "75vw",
+                    color: "white",
+                }}
+            >
+                {name}
+            </h1>
+            <p style={{ margin: "0px", marginBottom: "10vh", color: "white" }}>
+                {description}
+            </p>
             <div
                 style={{
                     display: "flex",
@@ -74,6 +88,7 @@ function JudgeTask({
                                           borderRadius: "1vw",
                                           marginRight: "5px",
                                           marginBottom: "5px",
+                                          cursor: "pointer",
                                       }}
                                   >
                                       Vote{selected == i ? "d" : ""}
@@ -94,7 +109,7 @@ function JudgeTask({
                 <button
                     style={{
                         margin: "20px",
-                        fontSize: "1em",
+                        fontSize: "5em",
                         borderRadius: "10vw",
                         backgroundColor: "#003487",
                         color: "white",

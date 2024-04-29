@@ -6,6 +6,7 @@ function TaskItem({ name, description, completed, onClick }) {
             style={{
                 width: "80vw",
                 backgroundImage: `url(${purpleSpace})`,
+                backgroundSize: "cover",
                 opacity: completed ? "80%" : "100%",
                 borderRadius: "30px",
                 margin: "0px",
@@ -13,7 +14,7 @@ function TaskItem({ name, description, completed, onClick }) {
                 padding: "10px",
                 userSelect: "none",
                 color: completed ? "#444444" : "#000000",
-                boxShadow: "0px 0px 5px 5px",
+                boxShadow: "0px 0px 5px 5px gray",
             }}
             onClick={onClick}
         >

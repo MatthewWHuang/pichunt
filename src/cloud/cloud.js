@@ -57,6 +57,11 @@ function setWinner(gameID, task, winner) {
     set(ref, winner);
 }
 
+async function getWinner(gameID, task) {
+    const ref = databaseRef(database, `/${gameID}/${task}/winner`);
+    return (await get(ref)).toJSON();
+}
+
 async function gameExists(gameID) {
     const ref = databaseRef(database, `/${gameID}`);
     return (await get(ref)).exists();
@@ -64,8 +69,8 @@ async function gameExists(gameID) {
 
 async function loadGame(gameID) {
     const ref = databaseRef(database, `/${gameID}`);
-    return Object.values((await get(ref)).toJSON()).map((task) => {
-        return { ...task, completed: false };
+    return Object.entries((await get(ref)).toJSON()).map(([id, task]) => {
+        return { ...task, id: id };
     });
 }
 
@@ -77,4 +82,5 @@ export {
     loadGame,
     gameExists,
     getFileRef,
+    getWinner,
 };
