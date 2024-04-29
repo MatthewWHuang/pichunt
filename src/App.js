@@ -1,25 +1,78 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import TaskList from "./components/TaskList";
+import React, { useState } from "react";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    const [tasks, setTasks] = useState([
+        {
+            name: "Fresh Fruit",
+            description: "Take a picture of fresh fruit.",
+            completed: true,
+        },
+        {
+            name: "Fresh Fruit",
+            description: "Take a picture of fresh fruit.",
+            completed: false,
+        },
+        {
+            name: "Fresh Fruit",
+            description: "Take a picture of fresh fruit.",
+            completed: false,
+        },
+        {
+            name: "Fresh Fruit",
+            description: "Take a picture of fresh fruit.",
+            completed: false,
+        },
+        {
+            name: "Fresh Fruit",
+            description: "Take a picture of fresh fruit.",
+            completed: false,
+        },
+        {
+            name: "Fresh Fruit",
+            description: "Take a picture of fresh fruit.",
+            completed: false,
+        },
+        {
+            name: "Fresh Fruit",
+            description: "Take a picture of fresh fruit.",
+            completed: false,
+        },
+        {
+            name: "Fresh Fruit",
+            description: "Take a picture of fresh fruit.",
+            completed: false,
+        },
+        {
+            name: "Fresh Fruit",
+            description: "Take a picture of fresh fruit.",
+            completed: false,
+        },
+        {
+            name: "Fresh Fruit",
+            description: "Take a picture of fresh fruit.",
+            completed: false,
+        },
+    ]);
+    const changeTask = (index, newTask) => {
+        const newTasks = [...tasks];
+        newTasks[index] = newTask;
+        setTasks(newTasks);
+    };
+    return (
+        <div
+            className="App"
+            style={{
+                width: "100%",
+                minHeight: "100vh",
+                backgroundColor: "#0fc8c0",
+                margin: "0px",
+            }}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+            <TaskList tasks={tasks} changeTask={changeTask} />
+        </div>
+    );
 }
 
 export default App;
