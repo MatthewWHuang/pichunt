@@ -14,10 +14,12 @@ function Task({
     const [image, setImage] = useState(getFileRef(gameID, id, username));
     const [imageURL, setImageURL] = useState(null);
     const [takingPicture, setTakingPicture] = useState(false);
+    const [changed, setChanged] = useState(false);
     const videoRef = useRef(null);
     const onImageChanged = (e) => {
         setImage(e.target.files[0]);
         setImageURL(URL.createObjectURL(e.target.files[0]));
+        setChanged(true);
     };
     const takePicture = () => {
         const video = videoRef.current;
@@ -34,10 +36,13 @@ function Task({
             setImage(blob);
             setImageURL(URL.createObjectURL(blob));
             setTakingPicture(false);
+            setChanged(true);
         }, "image/png");
     };
     useEffect(() => {
-        downloadFile(image).then((url) => setImageURL(url));
+        downloadFile(image)
+            .then((url) => setImageURL(url))
+            .catch((url) => {});
     }, []);
     return (
         <div
@@ -83,7 +88,7 @@ function Task({
                         if (nowTakingPicture) {
                             const stream =
                                 await navigator.mediaDevices.getUserMedia({
-                                    video: true,
+                                    video: { facingMode: "environment" },
                                 });
                             videoRef.current.srcObject = stream;
                         } else {
@@ -107,10 +112,11 @@ function Task({
                 style={{
                     maxWidth: "70vw",
                     height: "30vh",
-                    display: takingPicture ? "inline" : "none",
+                    display: takingPicture ? "block" : "none",
                 }}
                 autoPlay
                 muted
+                playsInline
             />
             {image ? (
                 <img
@@ -134,7 +140,7 @@ function Task({
                         uploadFile(image, gameID, id, username);
                         onSubmit(image);
                     }}
-                    disabled={image == null}
+                    disabled={imageURL == null || !changed}
                 >
                     {completed ? "Update" : "Submit"}
                 </button>

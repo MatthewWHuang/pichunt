@@ -110,9 +110,13 @@ function JudgeTask({
                 </button>
                 <p
                     style={{
-                        fontSize: "10vh",
+                        fontSize: "7vh",
+                        fontFamily: "sans-serif",
                         color: "red",
                         margin: "0px",
+                        position: "absolute",
+                        top: "3%",
+                        left: "3%",
                     }}
                     onClick={onExit}
                 >
