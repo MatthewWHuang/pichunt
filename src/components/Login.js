@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { gameExists as getGameExists } from "../cloud/cloud";
 
+import purpleSpace from "../purple-space.jpg";
+
 function Login({ onSubmit, defaultGameID }) {
     const [username, setUsername] = useState("");
     const [gameID, setGameID] = useState(defaultGameID || "");
@@ -22,7 +24,7 @@ function Login({ onSubmit, defaultGameID }) {
             style={{
                 width: "80vw",
                 height: "100%",
-                backgroundColor: "#0fc8c0",
+                backgroundImage: `url(${purpleSpace})`,
                 borderRadius: "5vw",
                 userSelect: "none",
                 left: "10vw",
@@ -43,7 +45,7 @@ function Login({ onSubmit, defaultGameID }) {
             >
                 <label
                     htmlFor="username"
-                    style={{ margin: "1vh", fontSize: "5vw" }}
+                    style={{ margin: "1vh", fontSize: "5vw", color: "white", }}
                 >
                     Enter Username:{" "}
                 </label>
@@ -75,7 +77,7 @@ function Login({ onSubmit, defaultGameID }) {
             >
                 <label
                     htmlFor="game"
-                    style={{ margin: "1vh", fontSize: "5vw" }}
+                    style={{ margin: "1vh", fontSize: "5vw", color: "white", }}
                 >
                     Enter Game ID:{" "}
                 </label>
@@ -94,6 +96,7 @@ function Login({ onSubmit, defaultGameID }) {
                     placeholder="Game ID"
                     type="text"
                     id="game"
+                    autoComplete="off"
                     onChange={onGameChanged}
                     defaultValue={gameID}
                 />
@@ -105,6 +108,7 @@ function Login({ onSubmit, defaultGameID }) {
                     fontFamily: "'MuseoModerno', sans-serif",
                     fontWeight: "500",
                     borderColor: "transparent",
+                    backgroundColor: "white",
                 }}
                 onClick={(e) => {
                     onSubmit(username, gameID);

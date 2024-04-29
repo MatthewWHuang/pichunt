@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import { uploadFile, downloadFile, getFileRef } from "../cloud/cloud";
 
+import darkSwirls from "../dark-swirls.jpg";
+
 function Task({
     name,
     description,
@@ -50,7 +52,7 @@ function Task({
                 width: "80vw",
                 maxHeight: "80vh",
                 padding: "20px",
-                backgroundColor: "#b08fff",
+                backgroundImage: `url(${darkSwirls})`,
                 opacity: completed ? "80%" : "100%",
                 borderRadius: "30px",
                 userSelect: "none",
