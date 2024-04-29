@@ -9,7 +9,7 @@ import { loadGame } from "./cloud/cloud";
 
 function App() {
     useEffect(() => {
-        document.title = "PicHunt";
+        document.title = "PicHunt - Join Game";
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
         const params = {};
@@ -36,7 +36,7 @@ function App() {
         }
     }, [username]);
     useEffect(() => {
-        document.title = `PicHunt - ${gameID}`;
+        document.title = `PicHunt - ${gameID || "Join Game"}`;
         if (username && !gameID) {
             var oldGameID = localStorage.getItem("PicHuntGameID");
             if (oldGameID) {

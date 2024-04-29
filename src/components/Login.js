@@ -116,7 +116,7 @@ function Login({ onSubmit, defaultGameID }) {
                 }}
                 disabled={username == "" || gameID == "" || !gameExists}
             >
-                Submit
+                Join Game
             </button>
         </div>
     );
