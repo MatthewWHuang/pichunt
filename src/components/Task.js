@@ -77,7 +77,16 @@ function Task({
             >
                 {name}
             </h1>
-            <p style={{ margin: "0px", color: "white" }}>{description}</p>
+            <p
+                style={{
+                    margin: "0px",
+                    color: "white",
+                    fontSize: "1.5em",
+                    maxWidth: "75vw",
+                }}
+            >
+                {description}
+            </p>
             <div
                 style={{
                     fontSize: "2vh",

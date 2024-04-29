@@ -56,7 +56,14 @@ function JudgeTask({
             >
                 {name}
             </h1>
-            <p style={{ margin: "0px", marginBottom: "10vh", color: "white" }}>
+            <p
+                style={{
+                    margin: "0px",
+                    marginBottom: "10vh",
+                    color: "white",
+                    maxWidth: "75vw",
+                }}
+            >
                 {description}
             </p>
             <div

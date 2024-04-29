@@ -42,12 +42,22 @@ function PresentTask({ name, description, completed, id, onExit, gameID }) {
                     marginBottom: "0px",
                     marginTop: "0",
                     maxWidth: "75vw",
+                    fontSize: "3em",
                     color: "white",
                 }}
             >
                 {name}
             </h1>
-            <p style={{ margin: "0px", color: "white" }}>{description}</p>
+            <p
+                style={{
+                    margin: "0px",
+                    color: "white",
+                    fontSize: "2em",
+                    maxWidth: "75vw",
+                }}
+            >
+                {description}
+            </p>
             <div>
                 <img style={{ height: "50vh" }} src={winningImage} />
                 <p style={{ fontSize: "3em", margin: "0px", color: "black" }}>
