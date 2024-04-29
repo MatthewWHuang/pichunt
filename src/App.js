@@ -16,6 +16,9 @@ function App() {
             // DecodeURIComponent in case values are URL encoded
             params[key] = decodeURIComponent(value);
         }
+        if (params["gameID"] != localStorage.getItem("PicHuntGameID")) {
+            localStorage.clear();
+        }
         setGameID(params["gameID"] || gameID);
     }, []);
     const [username, setUsername] = useState("");

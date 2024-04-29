@@ -96,7 +96,7 @@ function Task({
                         }
                     }}
                 >
-                    📷
+                    {takingPicture ? "X" : "📷"}
                 </button>
                 {takingPicture ? (
                     <button
