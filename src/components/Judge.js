@@ -28,7 +28,7 @@ function Judge({ defaultTasks, gameID }) {
         }
     }, [tasks]);
     useEffect(() => {
-        if (defaultTasks) {
+        if (defaultTasks.length) {
             setTasks(defaultTasks);
         }
     }, [defaultTasks]);
