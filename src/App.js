@@ -9,6 +9,7 @@ import { loadGame } from "./cloud/cloud";
 
 function App() {
     useEffect(() => {
+        document.title = "PicHunt";
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
         const params = {};
@@ -16,7 +17,7 @@ function App() {
             // DecodeURIComponent in case values are URL encoded
             params[key] = decodeURIComponent(value);
         }
-        if (params["gameID"] != localStorage.getItem("PicHuntGameID")) {
+        if (params["gameID"] !== localStorage.getItem("PicHuntGameID")) {
             localStorage.clear();
         }
         setGameID(params["gameID"] || gameID);
@@ -35,12 +36,13 @@ function App() {
         }
     }, [username]);
     useEffect(() => {
+        document.title = `PicHunt - ${gameID}`;
         if (username && !gameID) {
             var oldGameID = localStorage.getItem("PicHuntGameID");
             if (oldGameID) {
                 setGameID(oldGameID);
             }
-        } else {
+        } else if (gameID.length) {
             localStorage.setItem("PicHuntGameID", gameID);
         }
     }, [gameID]);
@@ -50,6 +52,7 @@ function App() {
         loadGame(g).then((tasks) => {
             setDefaultTasks(tasks);
         });
+        document.title = `PicHunt - ${gameID}`;
     };
     return (
         <div

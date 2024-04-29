@@ -11,11 +11,12 @@ function TaskItem({ name, description, completed, onClick }) {
                 padding: "10px",
                 userSelect: "none",
                 color: completed ? "#444444" : "#000000",
+                boxShadow: "0px 0px 5px 5px",
             }}
             onClick={onClick}
         >
-            <h1 style={{ marginTop: "0px" }}>{name}</h1>
-            <p>{description}</p>
+            <h1 style={{ marginTop: "0px", fontSize: "3em" }}>{name}</h1>
+            <h2 style={{ fontSize: "2em" }}>{description}</h2>
             <p
                 style={{
                     visibility: completed ? "visible" : "hidden",

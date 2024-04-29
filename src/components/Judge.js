@@ -23,13 +23,14 @@ function Judge({ defaultTasks, gameID }) {
                 setTasks(JSON.parse(loadedTasks));
             }
             setTasksLoaded(true);
-        } else {
+        } else if (tasks.length) {
             localStorage.setItem("PicHuntTasks", JSON.stringify(tasks));
         }
     }, [tasks]);
     useEffect(() => {
         if (defaultTasks.length) {
             setTasks(defaultTasks);
+            localStorage.setItem("PicHuntTasks", JSON.stringify(defaultTasks));
         }
     }, [defaultTasks]);
     return (

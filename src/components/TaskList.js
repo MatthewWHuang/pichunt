@@ -22,7 +22,7 @@ function TaskList({ username, defaultTasks, gameID }) {
                 setTasks(JSON.parse(loadedTasks));
             }
             setTasksLoaded(true);
-        } else {
+        } else if (tasks.length) {
             localStorage.setItem("PicHuntTasks", JSON.stringify(tasks));
         }
     }, [tasks]);
@@ -40,9 +40,6 @@ function TaskList({ username, defaultTasks, gameID }) {
                 color: "white",
             }}
         >
-            <h1>
-                Logged in as <b>{username}</b>.
-            </h1>
             {activeTask ? (
                 <Task
                     name={activeTask.name}
@@ -74,6 +71,24 @@ function TaskList({ username, defaultTasks, gameID }) {
                     />
                 ))
             )}
+
+            <div
+                style={{
+                    position: "fixed",
+                    bottom: "0px",
+                    boxShadow: "0px 0px 5px 5px",
+                    padding: "5px",
+                    backgroundColor: "black",
+                    paddingBottom: "0px",
+                    width: "100%",
+                    zIndex: "1",
+                }}
+            >
+                <h1 style={{ margin: "5px" }}>PicHunt</h1>
+                <h2 style={{ margin: "5px", marginBottom: "10px" }}>
+                    You're playing {gameID}. Logged in as <i>{username}</i>.
+                </h2>
+            </div>
         </div>
     );
 }

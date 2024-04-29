@@ -51,10 +51,9 @@ function Task({
                 maxHeight: "80vh",
                 padding: "20px",
                 backgroundColor: "#b08fff",
-                opacity: completed ? "80%" : "100%",
                 borderRadius: "30px",
                 userSelect: "none",
-                top: "10vh",
+                top: "2vh",
                 position: "fixed",
                 boxShadow: "0px 0px 15px white",
                 display: "flex",
@@ -62,11 +61,20 @@ function Task({
                 alignItems: "center",
                 fontSize: "1.5em",
                 overflow: "scroll",
+                zIndex: "2",
             }}
         >
-            <h1 style={{ marginBottom: "0px", marginTop: "0" }}>{name}</h1>
+            <h1
+                style={{
+                    marginBottom: "0px",
+                    marginTop: "0",
+                    maxWidth: "75vw",
+                }}
+            >
+                {name}
+            </h1>
             <p style={{ margin: "0px" }}>{description}</p>
-            <input
+            <div
                 style={{
                     fontSize: "2vh",
                     marginLeft: "auto",
@@ -74,12 +82,44 @@ function Task({
                     marginTop: "10px",
                     marginBottom: "10px",
                 }}
-                type="file"
-                title="Upload Image"
-                accept="image/*"
-                onChange={onImageChanged}
-            />
-            <div style={{ display: "flex", flexDirection: "row" }}>
+            >
+                <label htmlFor="camera">
+                    {imageURL ? (
+                        <div>
+                            <img
+                                style={{ maxWidth: "70vw", height: "30vh" }}
+                                src={imageURL}
+                            />
+
+                            <p style={{ margin: "0px", fontSize: "3vh" }}>
+                                <i>Click to change</i>
+                            </p>
+                        </div>
+                    ) : (
+                        <div
+                            style={{
+                                display: "inline-block",
+                                cursor: "pointer",
+                                border: "5px solid black",
+                                backgroundColor: "gray",
+                                borderRadius: "5px",
+                            }}
+                        >
+                            <p style={{ fontSize: "20vh", margin: "0" }}>📷</p>
+                        </div>
+                    )}
+                </label>
+                <input
+                    style={{ display: "none" }}
+                    type="file"
+                    title="Upload Image"
+                    accept="image/*"
+                    onChange={onImageChanged}
+                    capture="environment"
+                    id="camera"
+                />
+            </div>
+            {/* <div style={{ display: "flex", flexDirection: "row" }}>
                 <button
                     style={{ fontSize: "10vh", borderRadius: "1vw" }}
                     onClick={async () => {
@@ -117,13 +157,13 @@ function Task({
                 autoPlay
                 muted
                 playsInline
-            />
-            {image ? (
+            /> */}
+            {/* {imageURL ? (
                 <img
                     style={{ maxWidth: "70vw", height: "30vh" }}
                     src={imageURL}
                 />
-            ) : null}
+            ) : null} */}
 
             <div style={{ display: "flex", flexDirection: "row" }}>
                 <button
