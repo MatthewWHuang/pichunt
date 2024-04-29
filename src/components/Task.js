@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import { uploadFile } from "../cloud/upload";
+import { uploadFile } from "../cloud/cloud";
 
 function Task({
     name,
     description,
     completed,
-    setCompleted,
     onSubmit,
     onExit,
     id,
+    username,
 }) {
     const [image, setImage] = useState(null);
     const onImageChanged = (e) => {
@@ -52,8 +52,7 @@ function Task({
                         style={{ fontSize: "10vh", borderRadius: "1vw" }}
                         type="submit"
                         onClick={() => {
-                            setCompleted(true);
-                            uploadFile(image, "0", id, "admin");
+                            uploadFile(image, "0", id, username);
                             onSubmit(image);
                         }}
                         disabled={image == null}

@@ -1,17 +1,18 @@
+import { setWinner } from "../cloud/cloud";
+import JudgeTask from "./JudgeTask";
 import TaskItem from "./TaskItem";
-import Task from "./Task";
 import React, { useState, useEffect } from "react";
 
-function TaskList({ username, defaultTasks }) {
+function Judge({ defaultTasks }) {
     const [tasks, setTasks] = useState(defaultTasks);
     const [tasksLoaded, setTasksLoaded] = useState(false);
+    const [activeTask, setActiveTask] = useState(null);
+    const [activeTaskIndex, setActiveTaskIndex] = useState(null);
     const changeTask = (index, newTask) => {
         const newTasks = [...tasks];
         newTasks[index] = newTask;
         setTasks(newTasks);
     };
-    const [activeTask, setActiveTask] = useState(null);
-    const [activeTaskIndex, setActiveTaskIndex] = useState(null);
     const setCompleted = (index, newCompleted) => {
         changeTask(index, { ...tasks[index], completed: newCompleted });
     };
@@ -34,9 +35,7 @@ function TaskList({ username, defaultTasks }) {
                 flexDirection: "column",
             }}
         >
-            <h1>
-                Logged in as <b>{username}</b>.
-            </h1>
+            <h1>Judge</h1>
             {tasks.map((task, i) => (
                 <TaskItem
                     name={task.name}
@@ -50,24 +49,21 @@ function TaskList({ username, defaultTasks }) {
                 />
             ))}
             {activeTask ? (
-                <Task
+                <JudgeTask
                     name={activeTask.name}
                     description={activeTask.description}
                     completed={activeTask.completed}
-                    setCompleted={(newCompleted) =>
-                        setCompleted(activeTaskIndex, newCompleted)
-                    }
-                    onSubmit={(image) => {
+                    id={activeTask.id}
+                    onExit={() => setActiveTask(null)}
+                    onSubmit={(winner) => {
+                        setWinner("0", activeTask.id, winner);
                         setCompleted(activeTaskIndex, true);
                         setActiveTask(null);
                     }}
-                    onExit={() => setActiveTask(null)}
-                    id={activeTask.id}
-                    username={username}
                 />
             ) : null}
         </div>
     );
 }
 
-export default TaskList;
+export default Judge;
