@@ -30,7 +30,8 @@ function JudgeTask({
             style={{
                 width: "80vw",
                 height: "70vh",
-                backgroundColor: completed ? "#8ed9af" : "#26f080",
+                backgroundColor: "#b08fff",
+                opacity: completed ? "80%" : "100%",
                 borderRadius: "5vw",
                 userSelect: "none",
                 top: "15vh",
@@ -89,30 +90,35 @@ function JudgeTask({
                       })
                     : null}
             </div>
-            {completed ? null : (
-                <div style={{ display: "flex", flexDirection: "row" }}>
-                    <button
-                        style={{ fontSize: "10vh", borderRadius: "1vw" }}
-                        type="submit"
-                        onClick={() => {
-                            onSubmit(usernames[selected]);
-                        }}
-                        disabled={selected == null}
-                    >
-                        Submit
-                    </button>
-                    <p
-                        style={{
-                            fontSize: "10vh",
-                            color: "red",
-                            margin: "0px",
-                        }}
-                        onClick={onExit}
-                    >
-                        <b>X</b>
-                    </p>
-                </div>
-            )}
+            <div style={{ display: "flex", flexDirection: "row" }}>
+                <button
+                    style={{
+                        margin: "20px",
+                        fontSize: "1em",
+                        borderRadius: "10vw",
+                        backgroundColor: "#003487",
+                        color: "white",
+                        fontFamily: "MuseoModerno",
+                    }}
+                    type="submit"
+                    onClick={() => {
+                        onSubmit(usernames[selected]);
+                    }}
+                    disabled={selected == null}
+                >
+                    {completed ? "Update Vote" : "Vote"}
+                </button>
+                <p
+                    style={{
+                        fontSize: "10vh",
+                        color: "red",
+                        margin: "0px",
+                    }}
+                    onClick={onExit}
+                >
+                    <b>X</b>
+                </p>
+            </div>
         </div>
     );
 }

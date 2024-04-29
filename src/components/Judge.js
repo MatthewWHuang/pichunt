@@ -40,19 +40,7 @@ function Judge({ defaultTasks, gameID }) {
                 flexDirection: "column",
             }}
         >
-            <h1>Judge</h1>
-            {tasks.map((task, i) => (
-                <TaskItem
-                    name={task.name}
-                    description={task.description}
-                    completed={task.completed}
-                    onClick={() => {
-                        setActiveTask(task);
-                        setActiveTaskIndex(i);
-                    }}
-                    key={task.id}
-                />
-            ))}
+            <h1 style={{ color: "white" }}>Judge</h1>
             {activeTask ? (
                 <JudgeTask
                     name={activeTask.name}
@@ -67,7 +55,20 @@ function Judge({ defaultTasks, gameID }) {
                     }}
                     gameID={gameID}
                 />
-            ) : null}
+            ) : (
+                tasks.map((task, i) => (
+                    <TaskItem
+                        name={task.name}
+                        description={task.description}
+                        completed={task.completed}
+                        onClick={() => {
+                            setActiveTask(task);
+                            setActiveTaskIndex(i);
+                        }}
+                        key={task.id}
+                    />
+                ))
+            )}
         </div>
     );
 }
