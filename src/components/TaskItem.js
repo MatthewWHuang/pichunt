@@ -1,9 +1,11 @@
+import purpleSpace from "../purple-space.jpg";
+
 function TaskItem({ name, description, completed, onClick }) {
     return (
         <div
             style={{
                 width: "80vw",
-                backgroundColor: "#b08fff",
+                backgroundImage: `url(${purpleSpace})`,
                 opacity: completed ? "80%" : "100%",
                 borderRadius: "30px",
                 margin: "0px",
@@ -15,8 +17,10 @@ function TaskItem({ name, description, completed, onClick }) {
             }}
             onClick={onClick}
         >
-            <h1 style={{ marginTop: "0px", fontSize: "3em" }}>{name}</h1>
-            <h2 style={{ fontSize: "2em" }}>{description}</h2>
+            <h1 style={{ marginTop: "0px", color: "white", fontSize: "3em" }}>
+                {name}
+            </h1>
+            <p style={{ color: "white", fontSize: "2em" }}>{description}</p>
             <p
                 style={{
                     visibility: completed ? "visible" : "hidden",
