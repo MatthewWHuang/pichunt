@@ -3,7 +3,7 @@ import JudgeTask from "./JudgeTask";
 import TaskItem from "./TaskItem";
 import React, { useState, useEffect } from "react";
 
-function Judge({ defaultTasks }) {
+function Judge({ defaultTasks, gameID }) {
     const [tasks, setTasks] = useState(defaultTasks);
     const [tasksLoaded, setTasksLoaded] = useState(false);
     const [activeTask, setActiveTask] = useState(null);
@@ -27,6 +27,11 @@ function Judge({ defaultTasks }) {
             localStorage.setItem("PicHuntTasks", JSON.stringify(tasks));
         }
     }, [tasks]);
+    useEffect(() => {
+        if (defaultTasks) {
+            setTasks(defaultTasks);
+        }
+    }, [defaultTasks]);
     return (
         <div
             style={{
@@ -56,10 +61,11 @@ function Judge({ defaultTasks }) {
                     id={activeTask.id}
                     onExit={() => setActiveTask(null)}
                     onSubmit={(winner) => {
-                        setWinner("0", activeTask.id, winner);
+                        setWinner(gameID, activeTask.id, winner);
                         setCompleted(activeTaskIndex, true);
                         setActiveTask(null);
                     }}
+                    gameID={gameID}
                 />
             ) : null}
         </div>

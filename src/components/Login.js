@@ -1,20 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { gameExists as getGameExists } from "../cloud/cloud";
 
-function Login({ onSubmit }) {
+function Login({ onSubmit, defaultGameID }) {
     const [username, setUsername] = useState("");
+    const [gameID, setGameID] = useState(defaultGameID || "");
+    const [gameExists, setGameExists] = useState(false);
     const onUsernameChanged = (e) => {
-        console.log(e.target.value);
         setUsername(e.target.value);
     };
+    const onGameChanged = (e) => {
+        setGameID(e.target.value);
+    };
+    useEffect(() => {
+        setGameID(defaultGameID);
+    }, [defaultGameID]);
+    useEffect(() => {
+        getGameExists(gameID).then((exists) => setGameExists(exists));
+    }, [gameID]);
     return (
         <div
             style={{
                 width: "80vw",
-                height: "70vh",
+                height: "100%",
                 backgroundColor: "#26f080",
                 borderRadius: "5vw",
                 userSelect: "none",
-                top: "15vh",
                 left: "10vw",
                 position: "fixed",
                 margin: "0px",
@@ -52,11 +62,41 @@ function Login({ onSubmit }) {
                     onChange={onUsernameChanged}
                 />
             </div>
+            <div
+                style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    margin: "1vh",
+                }}
+            >
+                <label
+                    htmlFor="game"
+                    style={{ margin: "1vh", fontSize: "5vw" }}
+                >
+                    Enter Game ID:{" "}
+                </label>
+                <input
+                    style={{
+                        width: "50vw",
+                        height: "20vh",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        textAlign: "center",
+                        fontSize: "10vw",
+                    }}
+                    placeholder="Game ID"
+                    type="text"
+                    id="game"
+                    onChange={onGameChanged}
+                    defaultValue={gameID}
+                />
+            </div>
             <button
                 style={{ fontSize: "10vh", borderRadius: "1vw" }}
                 onClick={(e) => {
-                    onSubmit(username);
+                    onSubmit(username, gameID);
                 }}
+                disabled={username == "" || !gameExists}
             >
                 Submit
             </button>

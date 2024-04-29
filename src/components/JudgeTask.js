@@ -1,15 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { downloadFile, getUsersForTask } from "../cloud/cloud";
 
-function JudgeTask({ name, description, completed, id, onSubmit, onExit }) {
+function JudgeTask({
+    name,
+    description,
+    completed,
+    id,
+    onSubmit,
+    onExit,
+    gameID,
+}) {
     const [usernames, setUsernames] = useState([]);
     const [images, setImages] = useState([]);
     const [selected, setSelected] = useState(null);
     useEffect(() => {
-        getUsersForTask("0", id)
+        getUsersForTask(gameID, id)
             .then(async (res) => {
                 setUsernames(res.items.map((image) => image.name));
-                console.log(res.items.map((image) => image.name));
                 return Promise.all(
                     res.items.map(async (image) => await downloadFile(image))
                 );

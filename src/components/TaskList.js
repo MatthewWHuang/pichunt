@@ -2,7 +2,7 @@ import TaskItem from "./TaskItem";
 import Task from "./Task";
 import React, { useState, useEffect } from "react";
 
-function TaskList({ username, defaultTasks }) {
+function TaskList({ username, defaultTasks, gameID }) {
     const [tasks, setTasks] = useState(defaultTasks);
     const [tasksLoaded, setTasksLoaded] = useState(false);
     const changeTask = (index, newTask) => {
@@ -26,6 +26,11 @@ function TaskList({ username, defaultTasks }) {
             localStorage.setItem("PicHuntTasks", JSON.stringify(tasks));
         }
     }, [tasks]);
+    useEffect(() => {
+        if (defaultTasks.length) {
+            setTasks(defaultTasks);
+        }
+    }, [defaultTasks]);
     return (
         <div
             style={{
@@ -64,6 +69,7 @@ function TaskList({ username, defaultTasks }) {
                     onExit={() => setActiveTask(null)}
                     id={activeTask.id}
                     username={username}
+                    gameID={gameID}
                 />
             ) : null}
         </div>

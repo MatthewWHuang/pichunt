@@ -9,6 +9,7 @@ function Task({
     onExit,
     id,
     username,
+    gameID,
 }) {
     const [image, setImage] = useState(null);
     const [takingPicture, setTakingPicture] = useState(false);
@@ -113,7 +114,7 @@ function Task({
                         style={{ fontSize: "10vh", borderRadius: "1vw" }}
                         type="submit"
                         onClick={() => {
-                            uploadFile(image, "0", id, username);
+                            uploadFile(image, gameID, id, username);
                             onSubmit(image);
                         }}
                         disabled={image == null}

@@ -8,7 +8,7 @@ import {
     getDownloadURL,
     listAll,
 } from "firebase/storage";
-import { getDatabase, ref as databaseRef, set } from "firebase/database";
+import { getDatabase, ref as databaseRef, set, get } from "firebase/database";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -36,9 +36,7 @@ function uploadFile(file, gameID, task, user) {
     const storageRef = ref(storage, `/${gameID}/${task}/${user}`);
 
     // 'file' comes from the Blob or File API
-    uploadBytes(storageRef, file).then((snapshot) => {
-        console.log(`Uploaded image to` + `/${gameID}/${task}/${user}!`);
-    });
+    uploadBytes(storageRef, file);
 }
 
 function downloadFile(ref) {
@@ -51,8 +49,27 @@ async function getUsersForTask(gameID, task) {
 }
 
 function setWinner(gameID, task, winner) {
-    const ref = databaseRef(database, `/${gameID}/${task}`);
+    const ref = databaseRef(database, `/${gameID}/${task}/winner`);
     set(ref, winner);
 }
 
-export { uploadFile, downloadFile, getUsersForTask, setWinner };
+async function gameExists(gameID) {
+    const ref = databaseRef(database, `/${gameID}`);
+    return (await get(ref)).exists();
+}
+
+async function loadGame(gameID) {
+    const ref = databaseRef(database, `/${gameID}`);
+    return Object.values((await get(ref)).toJSON()).map((task) => {
+        return { ...task, completed: false };
+    });
+}
+
+export {
+    uploadFile,
+    downloadFile,
+    getUsersForTask,
+    setWinner,
+    loadGame,
+    gameExists,
+};
