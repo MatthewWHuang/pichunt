@@ -89,6 +89,45 @@ function TaskList({ username, defaultTasks, gameID }) {
                 <h2 style={{ margin: "5px", marginBottom: "10px" }}>
                     You're playing {gameID}. Logged in as <i>{username}</i>.
                 </h2>
+                <div
+                    style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        alignItems: "center",
+                        justifyContent: "center",
+                    }}
+                >
+                    <h1 style={{ margin: "5px" }}>
+                        {tasks.filter((task) => task.completed).length}/
+                        {tasks.length} Completed
+                    </h1>
+                    <div
+                        style={{
+                            height: "5vh",
+                            width: "20vw",
+                            backgroundColor: "white",
+                            padding: "0px",
+                            borderRadius: "5px",
+                        }}
+                    >
+                        <div
+                            style={{
+                                height: "5vh",
+                                width:
+                                    Math.round(
+                                        20 *
+                                            (tasks.filter(
+                                                (task) => task.completed
+                                            ).length /
+                                                tasks.length)
+                                    ).toString() + "vw",
+                                backgroundColor: "green",
+                                padding: "0px",
+                                borderRadius: "5px",
+                            }}
+                        />
+                    </div>
+                </div>
             </div>
         </div>
     );
