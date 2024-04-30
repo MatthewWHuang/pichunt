@@ -1,4 +1,6 @@
 import purpleSpace from "../purple-space.jpg";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSquareCheck, faSquare } from "@fortawesome/free-regular-svg-icons";
 
 function TaskItem({ name, description, completed, onClick }) {
     return (
@@ -32,7 +34,11 @@ function TaskItem({ name, description, completed, onClick }) {
                     marginTop: "-8px",
                 }}
             >
-                {completed ? "☑" : "☐"}
+                {completed ? (
+                    <FontAwesomeIcon icon={faSquareCheck} />
+                ) : (
+                    <FontAwesomeIcon icon={faSquare} />
+                )}
             </p>
             <div style={{ display: "flex", flexDirection: "column" }}>
                 <h1
