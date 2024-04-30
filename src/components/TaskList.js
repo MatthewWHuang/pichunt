@@ -75,6 +75,7 @@ function TaskList({ username, defaultTasks, gameID }) {
                             backgroundColor: "white",
                             padding: "0px",
                             borderRadius: "5px",
+                            marginLeft: "5px",
                         }}
                     >
                         <div
@@ -91,6 +92,11 @@ function TaskList({ username, defaultTasks, gameID }) {
                                 backgroundColor: "green",
                                 padding: "0px",
                                 borderRadius: "5px",
+                                boxShadow:
+                                    tasks.filter((task) => task.completed)
+                                        .length == tasks.length
+                                        ? "0px 0px 10px 5px green"
+                                        : "",
                             }}
                         />
                     </div>
