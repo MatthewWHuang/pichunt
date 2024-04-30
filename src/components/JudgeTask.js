@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { downloadFile, getUsersForTask } from "../cloud/cloud";
-
+import TaskHolder from "./TaskHolder";
 import darkSwirls from "../dark-swirls.jpg";
 
 function JudgeTask({
@@ -28,44 +28,7 @@ function JudgeTask({
             });
     }, []);
     return (
-        <div
-            style={{
-                width: "80vw",
-                height: "70vh",
-                backgroundImage: `url(${darkSwirls})`,
-                backgroundSize: "cover",
-                opacity: completed ? "80%" : "100%",
-                borderRadius: "5vw",
-                userSelect: "none",
-                top: "2vh",
-                position: "fixed",
-                margin: "0px",
-                boxShadow: "0px 0px 15px",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-            }}
-        >
-            <h1
-                style={{
-                    marginBottom: "0px",
-                    marginTop: "0",
-                    maxWidth: "75vw",
-                    color: "white",
-                }}
-            >
-                {name}
-            </h1>
-            <p
-                style={{
-                    margin: "0px",
-                    marginBottom: "10vh",
-                    color: "white",
-                    maxWidth: "75vw",
-                }}
-            >
-                {description}
-            </p>
+        <TaskHolder name={name} description={description} onExit={onExit}>
             <div
                 style={{
                     display: "flex",
@@ -130,22 +93,8 @@ function JudgeTask({
                 >
                     {completed ? "Update Vote" : "Vote"}
                 </button>
-                <p
-                    style={{
-                        fontSize: "7vh",
-                        fontFamily: "sans-serif",
-                        color: "red",
-                        margin: "0px",
-                        position: "absolute",
-                        top: "3%",
-                        left: "3%",
-                    }}
-                    onClick={onExit}
-                >
-                    <b>X</b>
-                </p>
             </div>
-        </div>
+        </TaskHolder>
     );
 }
 

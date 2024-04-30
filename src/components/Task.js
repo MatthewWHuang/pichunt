@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import { uploadFile, downloadFile, getFileRef } from "../cloud/cloud";
-
-import darkSwirls from "../dark-swirls.jpg";
+import TaskHolder from "./TaskHolder";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCamera } from "@fortawesome/free-solid-svg-icons";
 
 function Task({
     name,
@@ -47,67 +48,7 @@ function Task({
             .catch((url) => {});
     }, []);
     return (
-        <div
-            class="task"
-            style={{
-                width: "80vw",
-                maxHeight: "80vh",
-                padding: "20px",
-                //backgroundImage: `url(${darkSwirls})`,
-                backgroundColor: "#3d3c3cf0",
-                backgroundSize: "cover",
-                borderRadius: "30px",
-                userSelect: "none",
-                top: "2vh",
-                position: "fixed",
-                boxShadow: "0px 0px 15px white",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                overflow: "scroll",
-                zIndex: "2",
-                opacity: 0.95,
-            }}
-        >
-            <div
-                style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    alignItems: "flex-start",
-                    justifyContent: "flex-start",
-                    alignSelf: "baseline",
-                }}
-            >
-                <p
-                    style={{
-                        fontSize: "30px",
-                        fontFamily: "sans-serif",
-                        color: "red",
-                        margin: "10px 10px 0px 0px",
-                    }}
-                    onClick={onExit}
-                >
-                    <b>X</b>
-                </p>
-                <h1
-                    style={{
-                        marginBottom: "0px",
-                        marginTop: "0",
-                        maxWidth: "75vw",
-                        color: "white",
-                    }}
-                >
-                    {name}
-                </h1>
-            </div>
-            <p
-                style={{
-                    margin: "0px",
-                    color: "white",
-                }}
-            >
-                {description}
-            </p>
+        <TaskHolder name={name} description={description} onExit={onExit}>
             <div
                 style={{
                     fontSize: "2vh",
@@ -136,10 +77,14 @@ function Task({
                                 cursor: "pointer",
                                 border: "5px solid black",
                                 backgroundColor: "gray",
-                                borderRadius: "5px",
+                                borderRadius: "50%",
+                                padding: "5vh",
                             }}
                         >
-                            <p style={{ fontSize: "20vh", margin: "0" }}>📷</p>
+                            <FontAwesomeIcon
+                                icon={faCamera}
+                                style={{ height: "20vh", margin: "0px" }}
+                            />
                         </div>
                     )}
                 </label>
@@ -219,7 +164,7 @@ function Task({
                     {completed ? "Update" : "Submit"}
                 </button>
             </div>
-        </div>
+        </TaskHolder>
     );
 }
 
