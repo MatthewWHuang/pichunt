@@ -48,11 +48,13 @@ function Task({
     }, []);
     return (
         <div
+            class="task"
             style={{
                 width: "80vw",
                 maxHeight: "80vh",
                 padding: "20px",
-                backgroundImage: `url(${darkSwirls})`,
+                //backgroundImage: `url(${darkSwirls})`,
+                backgroundColor: "#3d3c3cf0",
                 backgroundSize: "cover",
                 borderRadius: "30px",
                 userSelect: "none",
@@ -62,27 +64,46 @@ function Task({
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
-                fontSize: "1.5em",
                 overflow: "scroll",
                 zIndex: "2",
+                opacity: 0.95,
             }}
         >
-            <h1
+            <div
                 style={{
-                    marginBottom: "0px",
-                    marginTop: "0",
-                    maxWidth: "75vw",
-                    color: "white",
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "flex-start",
+                    justifyContent: "flex-start",
+                    alignSelf: "baseline",
                 }}
             >
-                {name}
-            </h1>
+                <p
+                    style={{
+                        fontSize: "30px",
+                        fontFamily: "sans-serif",
+                        color: "red",
+                        margin: "10px 10px 0px 0px",
+                    }}
+                    onClick={onExit}
+                >
+                    <b>X</b>
+                </p>
+                <h1
+                    style={{
+                        marginBottom: "0px",
+                        marginTop: "0",
+                        maxWidth: "75vw",
+                        color: "white",
+                    }}
+                >
+                    {name}
+                </h1>
+            </div>
             <p
                 style={{
                     margin: "0px",
                     color: "white",
-                    fontSize: "1.5em",
-                    maxWidth: "75vw",
                 }}
             >
                 {description}
@@ -197,20 +218,6 @@ function Task({
                 >
                     {completed ? "Update" : "Submit"}
                 </button>
-                <p
-                    style={{
-                        fontSize: "7vh",
-                        fontFamily: "sans-serif",
-                        color: "red",
-                        margin: "0px",
-                        position: "absolute",
-                        top: "3%",
-                        left: "3%",
-                    }}
-                    onClick={onExit}
-                >
-                    <b>X</b>
-                </p>
             </div>
         </div>
     );

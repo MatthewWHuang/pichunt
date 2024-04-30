@@ -2,8 +2,8 @@
 
 .App {
   text-align: center;
-  font-family: "Jersey 15", sans-serif;
-  font-weight: bold;
+  font-family: "MuseoModerno", sans-serif;
+  font-weight: 300;
 }
 
 .App-logo {
@@ -30,6 +30,11 @@
 
 .App-link {
   color: #61dafb;
+}
+
+h1 {
+  font-weight: 500;
+  line-height: 1.2;
 }
 
 @keyframes App-logo-spin {

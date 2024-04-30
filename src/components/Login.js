@@ -22,45 +22,42 @@ function Login({ onSubmit, defaultGameID }) {
     return (
         <div
             style={{
-                width: "80vw",
-                height: "100%",
+                height: "100vh",
                 backgroundImage: `url(${purpleSpace})`,
                 backgroundSize: "cover",
-                borderRadius: "5vw",
+                borderRadius: "10px",
                 userSelect: "none",
-                left: "10vw",
-                position: "fixed",
-                margin: "0px",
+
+                margin: "10px",
                 boxShadow: "0px 0px 15px",
                 display: "flex",
                 flexDirection: "column",
-                alignItems: "center",
+                justifyContent: "center",
+                marginTop: 0,
+                gap: "30px",
             }}
         >
             <div
                 style={{
                     display: "flex",
                     flexDirection: "column",
-                    margin: "1vh",
+                    alignItems: "center",
                 }}
             >
                 <label
                     htmlFor="username"
-                    style={{ margin: "1vh", fontSize: "5vw", color: "white" }}
+                    style={{ fontSize: "2em", color: "white", width: "80%" }}
                 >
                     Enter Username:{" "}
                 </label>
                 <input
                     style={{
-                        width: "50vw",
-                        height: "20vh",
-                        alignItems: "center",
-                        justifyContent: "center",
                         textAlign: "center",
-                        fontSize: "5vw",
+                        fontSize: "2em",
                         fontFamily: "'MuseoModerno', sans-serif",
                         fontWeight: "500",
                         outline: "none",
+                        width: "80%",
                     }}
                     placeholder="Username"
                     type="text"
@@ -73,26 +70,24 @@ function Login({ onSubmit, defaultGameID }) {
                 style={{
                     display: "flex",
                     flexDirection: "column",
-                    margin: "1vh",
+                    alignItems: "center",
+                    marginTop: "40px",
                 }}
             >
                 <label
                     htmlFor="game"
-                    style={{ margin: "1vh", fontSize: "5vw", color: "white" }}
+                    style={{ fontSize: "2em", color: "white", width: "80%" }}
                 >
                     Enter Game ID:{" "}
                 </label>
                 <input
                     style={{
-                        width: "50vw",
-                        height: "20vh",
-                        alignItems: "center",
-                        justifyContent: "center",
                         textAlign: "center",
-                        fontSize: "5vw",
+                        fontSize: "2em",
                         fontFamily: "'MuseoModerno', sans-serif",
                         fontWeight: "500",
                         outline: "none",
+                        width: "80%",
                     }}
                     placeholder="Game ID"
                     type="text"
@@ -104,13 +99,18 @@ function Login({ onSubmit, defaultGameID }) {
             </div>
             <button
                 style={{
-                    fontSize: "10vw",
+                    fontSize: "2.5em",
                     borderRadius: "1vw",
                     fontFamily: "'MuseoModerno', sans-serif",
                     fontWeight: "500",
                     borderColor: "transparent",
-                    backgroundColor: "white",
-                    padding: "0px",
+                    backgroundColor: "#8dd317",
+                    padding: "0px 20px",
+                    margin: "20px auto",
+                    color: "#5f5959",
+                    maxWidth: "500px",
+                    opacity:
+                        username == "" || gameID == "" || !gameExists ? 0.5 : 1,
                 }}
                 onClick={(e) => {
                     onSubmit(username, gameID);
