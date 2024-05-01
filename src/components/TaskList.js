@@ -1,5 +1,6 @@
 import TaskItem from "./TaskItem";
 import Task from "./Task";
+import ClearButton from "./ClearButton";
 import React, { useState, useEffect } from "react";
 
 function TaskList({ username, defaultTasks, gameID }) {
@@ -39,6 +40,7 @@ function TaskList({ username, defaultTasks, gameID }) {
                 <p style={{ margin: "5px", marginBottom: "10px" }}>
                     You're playing {gameID}. Logged in as <i>{username}</i>.
                 </p>
+                <ClearButton />
             </div>
         );
     };
@@ -94,7 +96,7 @@ function TaskList({ username, defaultTasks, gameID }) {
                                 borderRadius: "5px",
                                 boxShadow:
                                     tasks.filter((task) => task.completed)
-                                        .length == tasks.length
+                                        .length === tasks.length
                                         ? "0px 0px 10px 5px green"
                                         : "",
                             }}
