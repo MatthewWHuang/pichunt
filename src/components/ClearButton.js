@@ -2,12 +2,15 @@ function ClearButton() {
     return (
         <button
             onClick={() => {
-                if (window.confirm("Are you sure you want to clear your data?") === true) {
+                if (
+                    window.confirm(
+                        "Are you sure you want to clear your data?"
+                    ) === true
+                ) {
                     localStorage.clear();
                     window.location.reload();
                 }
             }}
-
             style={{
                 right: "0",
                 padding: "10px",
@@ -16,7 +19,8 @@ function ClearButton() {
                 border: "none",
                 fontFamily: "MuseoModerno",
                 fontWeight: "bold",
-                borderRadius: "2px"
+                borderRadius: "2px",
+                cursor: "pointer",
             }}
         >
             Clear Data
